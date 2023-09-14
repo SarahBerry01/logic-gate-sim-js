@@ -1,10 +1,18 @@
 import './css/App.css';
-import Fake from './components/fake';
+import Header from './components/header';
+import Toolbar from './components/toolbar';
+import GatePicker from './components/gatePicker';
+import Playground from './components/playground';
 
 function App() {
   return (
     <div className="App">
-      <Fake/>
+      <Header/>
+      <div className='PlaygroundGatePickerCont'>
+        <GatePicker/>
+        <Playground/>
+        <Toolbar/>
+      </div>
     </div>
   );
 }
