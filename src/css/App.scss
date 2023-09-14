@@ -47,9 +47,10 @@ $purple: #250137;
     height: 100%;
     background-color: $light-grey;
     border-radius: 0.5rem;
+    
 
 }
-.Playground{
+.Canvas{
     width: calc(100% - 82px);
     height: 100%;
     background-color: $light-grey;
@@ -57,7 +58,7 @@ $purple: #250137;
     border: 2px solid  $medium-grey;
     border-radius: 0.5rem;
 }
-.PlaygroundGatePickerCont{
+.Playground{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -66,5 +67,11 @@ $purple: #250137;
     width: 100%;
     background-color: white;
     padding: 32px;
+}
+
+.GateButton{
+    width: 80%;
+    aspect-ratio: 1;
+    margin: 10%;
 }
 
