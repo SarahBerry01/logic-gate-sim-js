@@ -47,17 +47,24 @@ $purple: #250137;
     height: 100%;
     background-color: $light-grey;
     border-radius: 0.5rem;
+    
 
 }
-.Playground{
+
+.draggable-element{
+    width: 100px;
+    height: 100px;
+}
+.Canvas{
     width: calc(100% - 82px);
     height: 100%;
     background-color: $light-grey;
     margin: 32px;
     border: 2px solid  $medium-grey;
     border-radius: 0.5rem;
+    overflow: hidden;
 }
-.PlaygroundGatePickerCont{
+.Playground{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -67,4 +74,26 @@ $purple: #250137;
     background-color: white;
     padding: 32px;
 }
+
+Button{
+    width: 80%;
+    aspect-ratio: 1;
+    margin: 10%;
+}
+
+.gate {
+    position: absolute;
+    cursor: grab;
+    width: 64px;
+    height: 64px;
+  }
+  
+  .and{
+    background-image: url("data:image/svg+xml,%3Csvg id='enD32myRP8I1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Crect width='145.73563' height='170' rx='0' ry='0' transform='matrix(.686174 0 0 1 70 70)' paint-order='markers stroke fill' fill='%23211440' stroke-width='0'/%3E%3Cellipse rx='52.430643' ry='85' transform='matrix(1.192051 0 0 1 171.937195 155)' fill='%23211440' stroke-width='0'/%3E%3Crect width='70' height='10' rx='0' ry='0' transform='translate(0 190)' fill='%23211440' stroke-width='0'/%3E%3Crect width='70' height='10' rx='0' ry='0' transform='translate(0 100)' fill='%23211440' stroke-width='0'/%3E%3Crect width='70' height='10' rx='0' ry='0' transform='translate(230 150)' fill='%23211440' stroke-width='0'/%3E%3C/svg%3E%0A");
+  }
+
+  .SelectedTool{
+    background-color: $dark-grey;
+  }
+
 
