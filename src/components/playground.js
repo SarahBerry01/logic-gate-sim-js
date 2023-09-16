@@ -4,6 +4,13 @@ import and from '../assets/and.svg'
 
 
 function Playground() {
+  const [gates, setGates] = useState([]);
+  const [selectedTool, setSelectedTool] = useState("move");
+
+  const handleToolClick = (buttonId) => {
+    setSelectedTool(buttonId);
+  };
+
     function Canvas(){
         return <div className="Canvas" id="Canvas">
         <svg src="../assets/and.svg"/>
@@ -20,7 +27,6 @@ function Playground() {
       </div>
 
     }
-  const [gates, setGates] = useState([]);
 
   const addGate = (gateType) => {
     const newGate = {
@@ -72,9 +78,9 @@ useEffect(() => {
       </div>
       <Canvas/>
       <div className='Toolbar'>
-      <button>Connect</button>
-      <button>Erase</button>
-      <button>Move</button>
+      <button className={selectedTool === 'connect' ? 'SelectedTool' : ''} onClick={() => handleToolClick('connect')}>Connect</button>
+      <button className={selectedTool === 'erase' ? 'SelectedTool' : ''} onClick={() => handleToolClick('erase')}>Erase</button>
+      <button className={selectedTool === 'move' ? 'SelectedTool' : ''} onClick={() => handleToolClick('move')}>Move</button>
     </div>
     </div>
   );
