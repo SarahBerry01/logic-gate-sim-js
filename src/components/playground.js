@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import interact from 'interactjs';
+import React, { useState, useEffect } from "react";
+import interact from "interactjs";
+import { findConnectionPoint, connectionValid } from "./helpers.js";
 
 function Playground() {
   const [gates, setGates] = useState([]);
-  const [selectedTool, setSelectedTool] = useState('move');
+  const [selectedTool, setSelectedTool] = useState("move");
+  const [gateToConnect, setGateToConnect] = useState();
 
   const handleToolClick = (buttonId) => {
+    setGateToConnect();
     setSelectedTool(buttonId);
   };
 
@@ -20,12 +23,42 @@ function Playground() {
     setGates([...gates, newGate]);
   };
 
+  const connectGates = (secondId, secondConnPoint) => {
+    // check if not valid
+    if (
+      !connectionValid(
+        gateToConnect.id,
+        secondId,
+        gateToConnect.conn,
+        secondConnPoint
+      )
+    ) {
+      setGateToConnect();
+    }
+  };
+
+  const connectLogic = (id, conn) => {
+    if (gateToConnect === undefined) {
+      setGateToConnect({ id, conn });
+    } else {
+      connectGates(id, conn);
+    }
+  };
+
   const handleGateTap = (event) => {
-    if (selectedTool === 'erase') {
-      console.log("tap")
-      const clickedElement = event.target;
-      const updatedGates = gates.filter((gate) => gate.id === clickedElement.id);
+    const clickedElement = event.target;
+    if (selectedTool === "erase") {
+      const updatedGates = gates.filter(
+        (gate) => gate.id === clickedElement.id
+      );
       setGates(updatedGates);
+    }
+
+    if (selectedTool === "connect") {
+      // Get the dimensions and position of the element
+      const rect = clickedElement.getBoundingClientRect();
+      const connPoint = findConnectionPoint(rect, event.clientX, event.clientY);
+      connectLogic(clickedElement.id, connPoint);
     }
   };
 
@@ -33,17 +66,21 @@ function Playground() {
     gates.forEach((gate) => {
       const element = document.getElementById(gate.id);
 
-      if (element && selectedTool === 'move') {
+      if (element && selectedTool === "move") {
         interact(element).draggable({
-          modifiers: [interact.modifiers.restrictRect({ restriction: 'parent' })],
+          modifiers: [
+            interact.modifiers.restrictRect({ restriction: "parent" }),
+          ],
           onmove: (event) => {
             const target = event.target;
-            const x = parseFloat(target.getAttribute('x')) || 0;
-            const y = parseFloat(target.getAttribute('y')) || 0;
+            const x = parseFloat(target.getAttribute("x")) || 0;
+            const y = parseFloat(target.getAttribute("y")) || 0;
 
-            target.style.transform = `translate(${x + event.dx}px, ${y + event.dy}px)`;
-            target.setAttribute('x', x + event.dx);
-            target.setAttribute('y', y + event.dy);
+            target.style.transform = `translate(${x + event.dx}px, ${
+              y + event.dy
+            }px)`;
+            target.setAttribute("x", x + event.dx);
+            target.setAttribute("y", y + event.dy);
             gate.x = x + event.dx;
             gate.y = y + event.dy;
           },
@@ -69,22 +106,31 @@ function Playground() {
   return (
     <div className="Playground">
       <div className="Toolbar">
-        <button onClick={() => addGate('and')}>Add and</button>
-        <button onClick={() => addGate('or')}>Add or</button>
-        <button onClick={() => addGate('not')}>Add not</button>
+        <button onClick={() => addGate("and")}>Add and</button>
+        <button onClick={() => addGate("or")}>Add or</button>
+        <button onClick={() => addGate("not")}>Add not</button>
       </div>
       <div className="Canvas" id="Canvas">
         <svg src="../assets/and.svg" />
         {renderGates()}
       </div>
       <div className="Toolbar">
-        <button className={selectedTool === 'connect' ? 'SelectedTool' : ''} onClick={() => handleToolClick('connect')}>
+        <button
+          className={selectedTool === "connect" ? "SelectedTool" : ""}
+          onClick={() => handleToolClick("connect")}
+        >
           Connect
         </button>
-        <button className={selectedTool === 'erase' ? 'SelectedTool' : ''} onClick={() => handleToolClick('erase')}>
+        <button
+          className={selectedTool === "erase" ? "SelectedTool" : ""}
+          onClick={() => handleToolClick("erase")}
+        >
           Erase
         </button>
-        <button className={selectedTool === 'move' ? 'SelectedTool' : ''} onClick={() => handleToolClick('move')}>
+        <button
+          className={selectedTool === "move" ? "SelectedTool" : ""}
+          onClick={() => handleToolClick("move")}
+        >
           Move
         </button>
       </div>
