@@ -16,24 +16,24 @@ export function findConnectionPoint(rect, x, y) {
   }
   if (x >= left - tolerance && x <= left + tolerance) {
     if (y >= topIn - tolerance && y <= topIn + tolerance) {
-      return "inTop";
+      return "inputZero";
     }
     if (y >= bottomIn - tolerance && y <= bottomIn + tolerance) {
-      return "inBottom";
+      return "inputOne";
     }
   }
 }
 
 export function connectionValid(idOne, idTwo, connOne, connTwo) {
-  if (idOne === idTwo) {
-    return false;
+    if (idOne === idTwo) {
+    return {valid: false};
   }
   // check both are not outputs or both inputs
-  if (
-    (connOne !== "out" && connTwo !== "out") ||
-    (connOne === "out" && connTwo === "out")
-  ) {
-    return false;
+  if (connOne === "out" && connTwo !== "out"){
+    return {valid: true, in:idTwo, inConn:connTwo, out:idOne}
   }
-  return true;
+  if (connOne !== "out" && connTwo === "out"){
+    return {valid: true, in:idOne, inConn:connOne, out:idTwo}
+  }
+  return false;
 }

@@ -25,16 +25,23 @@ function Playground() {
 
   const connectGates = (secondId, secondConnPoint) => {
     // check if not valid
-    if (
-      !connectionValid(
-        gateToConnect.id,
-        secondId,
-        gateToConnect.conn,
-        secondConnPoint
-      )
-    ) {
-      setGateToConnect();
+    const validInfo = connectionValid(
+      gateToConnect.id,
+      secondId,
+      gateToConnect.conn,
+      secondConnPoint
+    );
+    // if valid, update gate property to define its input
+    if (validInfo.valid) {
+      const updatedGates = gates.map((gate) => {
+        if (gate.id === parseInt(validInfo.in)) {
+          return { ...gate, [validInfo.inConn]: validInfo.out };
+        }
+        return gate;
+      });
+      setGates(updatedGates);
     }
+    setGateToConnect();
   };
 
   const connectLogic = (id, conn) => {
