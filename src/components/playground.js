@@ -24,6 +24,7 @@ function Playground() {
   };
 
   const connectGates = (secondId, secondConnPoint) => {
+
     // check if not valid
     const validInfo = connectionValid(
       gateToConnect.id,
@@ -53,6 +54,7 @@ function Playground() {
   };
 
   const handleGateTap = (event) => {
+
     const clickedElement = event.target;
     if (selectedTool === "erase") {
       const updatedGates = gates.filter(
@@ -68,12 +70,35 @@ function Playground() {
       connectLogic(clickedElement.id, connPoint);
     }
   };
+  const drawConnections = () => {
 
+    const width = 84;
+    const buffer = 10;
+    const canvas = document.querySelector("#c");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    gates.forEach((gate) => {
+      const connectedGate = gates.find(
+        (g) => g.id === parseInt(gate.inputZero)
+      );
+      if (connectedGate) {
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(
+          connectedGate.x + width - buffer,
+          connectedGate.y + +(width / 2)
+        );
+        ctx.lineTo(gate.x + buffer, gate.y + width / 3);
+        ctx.stroke();
+      }
+    });
+  };
+  
   useEffect(() => {
     gates.forEach((gate) => {
       const element = document.getElementById(gate.id);
-
-      if (element && selectedTool === "move") {
+      if (element) {
         interact(element).draggable({
           modifiers: [
             interact.modifiers.restrictRect({ restriction: "parent" }),
@@ -88,15 +113,19 @@ function Playground() {
             }px)`;
             target.setAttribute("x", x + event.dx);
             target.setAttribute("y", y + event.dy);
-            gate.x = x + event.dx;
-            gate.y = y + event.dy;
+            gate.x = parseFloat(target.getAttribute("x")) || 0;
+            gate.y =  parseFloat(target.getAttribute("y")) || 0;
+            console.log()
+            
           },
         });
       }
     });
-  }, [gates, selectedTool]);
+  }, [gates]);
+
 
   const renderGates = () => {
+
     return gates.map((gate) => (
       <div
         key={gate.id}
@@ -104,7 +133,6 @@ function Playground() {
         className={`gate ${gate.type}`}
         x={gate.x}
         y={gate.y}
-        style={{ transform: `translate(${gate.x}px, ${gate.y}px)` }}
         onClick={handleGateTap}
       ></div>
     ));
@@ -117,9 +145,9 @@ function Playground() {
         <button onClick={() => addGate("or")}>Add or</button>
         <button onClick={() => addGate("not")}>Add not</button>
       </div>
-      <div className="Canvas" id="Canvas">
-        <svg src="../assets/and.svg" />
+      <div className="CanvasContainer" id="CanvasContainer">
         {renderGates()}
+        <canvas id="c" width="640" height="640" />
       </div>
       <div className="Toolbar">
         <button

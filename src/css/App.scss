@@ -55,14 +55,19 @@ $purple: #250137;
     width: 100px;
     height: 100px;
 }
-.Canvas{
-    width: calc(100% - 82px);
-    height: 100%;
+.CanvasContainer{
+    width: 640px;
+    height: 640px;
     background-color: $light-grey;
     margin: 32px;
     border: 2px solid  $medium-grey;
     border-radius: 0.5rem;
     overflow: hidden;
+}
+
+canvas{
+    width:100%;
+    height:100%;
 }
 .Playground{
     display: flex;
