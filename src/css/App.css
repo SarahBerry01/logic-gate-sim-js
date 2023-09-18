@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "VT323", monospace;
 }
 
 .Header {
@@ -73,22 +74,59 @@
   margin: 0px;
   padding: 0px;
   background-color: white;
-  border-color: #eeeeee;
-  border-width: 1px;
+  border: none;
 }
 
 .gridElement:hover {
-  background-color: #2980b9; /* Background color on hover */
+  background-color: #eeeeee; /* Background color on hover */
+}
+
+.circuitPlayground {
+  position: relative;
+  width: 640 px;
+  height: 480 px;
 }
 
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(15, 32px); /* Adjust the number of columns and size as needed */
+  grid-template-columns: repeat(20, 32px); /* Adjust the number of columns and size as needed */
   grid-template-rows: repeat(15, 32px); /* Adjust the number of rows and size as needed */
   gap: 0px; /* Adjust the gap between grid items as needed */
   justify-content: center; /* Center the grid horizontally */
   align-content: center; /* Center the grid vertically */
-  width: 480 px;
+  width: 640 px;
   height: 480 px;
-  padding: 10px;
+  border: 1px solid #eeeeee;
+}
+
+.and {
+  background-image: url(../assets/and.png);
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+}
+
+.or {
+  background-image: url("data:image/svg+xml,%3Csvg id='ees3MxJv8Zz1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='M70,70h101.937196c43.223675,3.572604,64.853368,50.745325,62.5,85-.221959,36.382158-24.633391,81.561725-54.437196,85h-110c39.281457-32.631239,46.48935-127.150713,0-170Z' transform='matrix(1.094643 0 0 1-28.348321 0)' fill='%231c247d' stroke-width='40'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1.18761 0 0 0.983787-59.822416 1.220957)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' transform='matrix(1.165041 0 0 1 0.398736 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='matrix(1.165041 0 0-1 0.398736 400)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3C/svg%3E%0A");
+}
+
+.not {
+  background-image: url("data:image/svg+xml,%3Csvg id='edSwuv50ABW1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1 0 0 0.983787-9.167716 1.220957)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M70,50v210L228.464171,150L70,50Z' fill='%231c247d' stroke-width='0.6'/%3E%3Cellipse rx='20' ry='19.97071' transform='translate(220 149.97071)' fill='%231c247d' stroke-width='0'/%3E%3C/svg%3E%0A");
+}
+
+.SelectedTool {
+  background-color: #747474;
+}
+
+.selectedGate {
+  background-color: #eeeeee;
+}
+
+Canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: transparent;
+  pointer-events: none;
+  width: 640 px;
+  height: 480 px;
 }/*# sourceMappingURL=App.css.map */

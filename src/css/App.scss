@@ -1,110 +1,142 @@
 @import url(reset);
 
 $light-grey: #eeeeee;
-$medium-grey:#dfdfdf;
+$medium-grey: #dfdfdf;
 $dark-grey: #747474;
 $orange: #fc8a00;
 $pink: #df0e88;
 $purple: #250137;
 
 * {
-    box-sizing: border-box;
-  }
-.App{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  box-sizing: border-box;
+}
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'VT323', monospace;
 }
 
-.Header{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 64px;
-    background: linear-gradient(45deg, $purple 20%,  $pink  200%);
-    padding: 10px;
+.Header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+  background: linear-gradient(45deg, $purple 20%, $pink 200%);
+  padding: 10px;
 }
 
-.Title{
-    font-size: 32px;
-    color: white;
+.Title {
+  font-size: 32px;
+  color: white;
 }
 
-.Toolbar{
-    width: 82px;
-    height: 100%;
-    background-color: $light-grey;
-    border-radius: 0.5rem;
-
-
+.Toolbar {
+  width: 82px;
+  height: 100%;
+  background-color: $light-grey;
+  border-radius: 0.5rem;
 }
 
-.GatePicker{
-    width: 82px;
-    height: 100%;
-    background-color: $light-grey;
-    border-radius: 0.5rem;
-    
-
+.GatePicker {
+  width: 82px;
+  height: 100%;
+  background-color: $light-grey;
+  border-radius: 0.5rem;
 }
 
-.draggable-element{
-    width: 100px;
-    height: 100px;
+.draggable-element {
+  width: 100px;
+  height: 100px;
 }
-.Canvas{
-    width: calc(100% - 82px);
-    height: 100%;
-    background-color: $light-grey;
-    margin: 32px;
-    border: 2px solid  $medium-grey;
-    border-radius: 0.5rem;
-    overflow: hidden;
+.Canvas {
+  width: calc(100% - 82px);
+  height: 100%;
+  background-color: $light-grey;
+  margin: 32px;
+  border: 2px solid $medium-grey;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
-.Playground{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 90%;
-    width: 100%;
-    background-color: white;
-    padding: 32px;
+.Playground {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  width: 100%;
+  background-color: white;
+  padding: 32px;
 }
 
-
-
-.gridElement{
-    width: 32px;
-    aspect-ratio: 1;
-    border-radius: 0px;
-    margin: 0px;
-    padding: 0px;
-    background-color: white;
-    border-color: $light-grey;
-    border-width: 1px;
-
+.gridElement {
+  width: 32px;
+  aspect-ratio: 1;
+  border-radius: 0px;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  border: none;
 }
 
 .gridElement:hover {
-    background-color: #2980b9; /* Background color on hover */
-  }  
-
-  .gridContainer {
-    display: grid;
-    grid-template-columns: repeat(15, 32px); /* Adjust the number of columns and size as needed */
-    grid-template-rows: repeat(15, 32px); /* Adjust the number of rows and size as needed */
-    gap: 0px; /* Adjust the gap between grid items as needed */
-    justify-content: center; /* Center the grid horizontally */
-    align-content: center; /* Center the grid vertically */
-    width: calc(15*32)px;
-    height: calc(15*32)px;
-    padding: 10px;
-    
-
+  background-color: $light-grey; /* Background color on hover */
 }
 
+.circuitPlayground{
+    position: relative;
+    width: calc(20 * 32) px;
+    height: calc(15 * 32) px;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(
+    20,
+    32px
+  ); /* Adjust the number of columns and size as needed */
+  grid-template-rows: repeat(
+    15,
+    32px
+  ); /* Adjust the number of rows and size as needed */
+  gap: 0px; /* Adjust the gap between grid items as needed */
+  justify-content: center; /* Center the grid horizontally */
+  align-content: center; /* Center the grid vertically */
+  width: calc(20 * 32) px;
+  height: calc(15 * 32) px;
+  border: 1px solid $light-grey;
+}
 
+.and {
+//   background-image: url("data:image/svg+xml,%3Csvg id='eYpfie3H4wT1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='M70,70h101.937196c43.223675,3.572604,64.853368,50.745325,62.5,85-.221959,36.382158-24.633391,81.561725-54.437196,85h-110v-170Z' transform='matrix(.999999 0 0 1-2.218446 0)' fill='%231c247d' stroke-width='40'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1 0 0 0.983787-9.167716 1.220957)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3C/svg%3E%0A");
+    background-image: url(../assets/and.png);
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+}
+
+.or {
+  background-image: url("data:image/svg+xml,%3Csvg id='ees3MxJv8Zz1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='M70,70h101.937196c43.223675,3.572604,64.853368,50.745325,62.5,85-.221959,36.382158-24.633391,81.561725-54.437196,85h-110c39.281457-32.631239,46.48935-127.150713,0-170Z' transform='matrix(1.094643 0 0 1-28.348321 0)' fill='%231c247d' stroke-width='40'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1.18761 0 0 0.983787-59.822416 1.220957)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' transform='matrix(1.165041 0 0 1 0.398736 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='matrix(1.165041 0 0-1 0.398736 400)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3C/svg%3E%0A");
+}
+
+.not{
+    background-image: url("data:image/svg+xml,%3Csvg id='edSwuv50ABW1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1 0 0 0.983787-9.167716 1.220957)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M70,50v210L228.464171,150L70,50Z' fill='%231c247d' stroke-width='0.6'/%3E%3Cellipse rx='20' ry='19.97071' transform='translate(220 149.97071)' fill='%231c247d' stroke-width='0'/%3E%3C/svg%3E%0A");
+}
+.SelectedTool {
+  background-color: $dark-grey;
+}
+
+.selectedGate {
+    background-color: $light-grey;
+  }
+
+Canvas{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: transparent;
+    pointer-events: none;
+    width: calc(20 * 32) px;
+    height: calc(15 * 32 ) px;
+}
