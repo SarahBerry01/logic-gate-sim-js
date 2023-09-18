@@ -66,23 +66,29 @@
   padding: 32px;
 }
 
-Button {
-  width: 80%;
+.gridElement {
+  width: 32px;
   aspect-ratio: 1;
-  margin: 10%;
+  border-radius: 0px;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  border-color: #eeeeee;
+  border-width: 1px;
 }
 
-.gate {
-  position: absolute;
-  cursor: grab;
-  width: 82px;
-  height: 82px;
+.gridElement:hover {
+  background-color: #2980b9; /* Background color on hover */
 }
 
-.and {
-  background-image: url("data:image/svg+xml,%3Csvg id='eGsQHpfx08R1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cdefs%3E%3ClinearGradient id='eGsQHpfx08R2-stroke' x1='0' y1='0.5' x2='1' y2='0.5' spreadMethod='pad' gradientUnits='objectBoundingBox' gradientTransform='translate(0 0)'%3E%3Cstop id='eGsQHpfx08R2-stroke-0' offset='0%25' stop-color='%23100b39'/%3E%3Cstop id='eGsQHpfx08R2-stroke-1' offset='100%25' stop-color='%237a2f4a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M70,70h101.937196c43.223675,3.572604,64.853368,50.745325,62.5,85-.221959,36.382158-24.633391,81.561725-54.437196,85h-110v-170Z' transform='matrix(.9 0 0 0.9 13.003262 15.5)' fill='none' stroke='url(%23eGsQHpfx08R2-stroke)' stroke-width='40'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1 0 0 0.99186-.937866 1.221)' fill='none' stroke='%237a2f4a' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' fill='none' stroke='%23100b39' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%23100b39' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329428 0 0 1.329428 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329428 0 0 1.329428 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329428 0 0 1.329428 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3C/svg%3E%0A");
-}
-
-.SelectedTool {
-  background-color: #747474;
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(15, 32px); /* Adjust the number of columns and size as needed */
+  grid-template-rows: repeat(15, 32px); /* Adjust the number of rows and size as needed */
+  gap: 0px; /* Adjust the gap between grid items as needed */
+  justify-content: center; /* Center the grid horizontally */
+  align-content: center; /* Center the grid vertically */
+  width: 480 px;
+  height: 480 px;
+  padding: 10px;
 }/*# sourceMappingURL=App.css.map */
