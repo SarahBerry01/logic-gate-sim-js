@@ -53,15 +53,20 @@ function Playground() {
       if (element.classList.contains("gate")) {
         console.log(element)
         if (element.getAttribute("inZeroRow")) {
-          const x1 = scale * (parseInt(element.getAttribute("col"))) * gateDim + 20;
-          const y1 = scale * (parseInt(element.getAttribute("row")) + 0.33) * gateDim;
-          const x2 = scale * (parseInt(element.getAttribute("inZeroCol")) + 1) * gateDim;
-          const y2 = scale * (parseInt(element.getAttribute("inZeroRow")) +0.5)  * gateDim;
+          let x1 = scale * (parseInt(element.getAttribute("col"))) * gateDim + 20;
+          let y1 = scale * (parseInt(element.getAttribute("row")) + (1/3)) * gateDim;
+          let x2 = scale * (parseInt(element.getAttribute("inZeroCol")) + 1) * gateDim;
+          let y2 = scale * (parseInt(element.getAttribute("inZeroRow")) +0.5)  * gateDim;
+          console.log(element.classList)
+          if (element.classList.contains("not") || element.classList.contains("output")){
+            console.log("!!!!!!!!!!!!")
+            y1 = scale * (parseInt(element.getAttribute("row")) + 0.5) * gateDim;
+          }
           draw(ctx, x1, y1, x2, y2)
         }
         if (element.getAttribute("inOneRow")) {
-          const x1 = scale * (parseInt(element.getAttribute("col"))) * gateDim + 20;
-          const y1 = scale * (parseInt(element.getAttribute("row")) + 0.66) * gateDim;
+          const x1 = scale * (parseInt(element.getAttribute("col"))) * gateDim;
+          const y1 = scale * (parseInt(element.getAttribute("row")) + (2/3)) * gateDim;
           const x2 = scale * (parseInt(element.getAttribute("inOneCol")) + 1) * gateDim;
           const y2 = scale * (parseInt(element.getAttribute("inOneRow")) +0.5)  * gateDim;
           draw(ctx, x1, y1, x2, y2)
@@ -79,36 +84,58 @@ function Playground() {
     ctx.stroke();
   }
 
+  function clear(){
+    window.location.reload();
+  }
+
   function handleClick(row, col) {
     const element = document.querySelector(`[row="${row}"][col="${col}"]`);
+    if (selectedTool === "select"){
+      console.log("switch");
+      if (element.classList.contains("switchOff")){
+        element.classList.remove("switchOff");
+        element.classList.add("switchOn")
+        element.setAttribute("gate", "switchOn");
+        console.log(element);
+      }
+      else if (element.classList.contains("switchOn")){
+        element.classList.remove("switchOn");
+        element.classList.add("switchOff")
+        element.setAttribute("gate", "switchOff");
+      }
+
+    }
     if (selectedTool === "erase") {
       element.setAttribute("gate", null);
       element.setAttribute("class", `gridElement`);
       //add logic to remove connections
     }
     if (selectedTool === "connect") {
-      if (selectedGate === undefined && element.className !== "gridElement") {
+      if (selectedGate === undefined ) {
+        if(element.className !== "gridElement" && !element.classList.contains("output")){
+        console.log("a")
         setSelectedGate({
           row: element.getAttribute("row"),
           col: element.getAttribute("col"),
         });
-        element.classList.add("selectedGate");
-      } else if (element.className !== "gridElement") {
+        element.classList.add("selectedGate")};
+      } else if (element.className !== "gridElement" ) {
         console.log(element.inzerorow)
+        console.log("b")
         // if no inputs exist, connect to top input
         if (!element.getAttribute("inZeroRow")){
         element.setAttribute("inZeroRow", selectedGate.row);
         element.setAttribute("inZeroCol", selectedGate.col);
         removeSelection();}
         // if top input exists, connect to bottom input
-        else if (!element.inOneRow){
+        else if (!element.inOneRow && !element.classList.contains("not")){
           element.setAttribute("inOneRow", selectedGate.row);
           element.setAttribute("inOneCol", selectedGate.col);
           removeSelection();
         }
       }
     }
-    if (["and", "or", "not"].includes(selectedTool)) {
+    if (["and", "or", "not", "switchOff", "output"].includes(selectedTool)) {
       element.setAttribute("gate", selectedTool);
       element.setAttribute("class", `gridElement gate ${selectedTool}`);
     }
@@ -117,41 +144,59 @@ function Playground() {
   return (
     <div className="Playground">
       <div className="Toolbar">
+      <button
+          className={selectedTool === "switchOff" ? "tool SelectedTool" : "tool"}
+          onClick={() => handleToolClick("switchOff")}
+        >
+          Add switch
+        </button>
         <button
-          className={selectedTool === "and" ? "SelectedTool" : ""}
+          className={selectedTool === "output" ? "tool SelectedTool" : "tool"}
+          onClick={() => handleToolClick("output")}
+        >
+          Add output
+        </button>
+        <button
+          className={selectedTool === "and" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("and")}
         >
           Add and
         </button>
         <button
-          className={selectedTool === "or" ? "SelectedTool" : ""}
+          className={selectedTool === "or" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("or")}
         >
           Add or
         </button>
         <button
-          className={selectedTool === "not" ? "SelectedTool" : ""}
+          className={selectedTool === "not" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("not")}
         >
           Add not
         </button>
         <button
-          className={selectedTool === "connect" ? "SelectedTool" : ""}
+          className={selectedTool === "connect" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("connect")}
         >
           Connect
         </button>
         <button
-          className={selectedTool === "erase" ? "SelectedTool" : ""}
+          className={selectedTool === "erase" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("erase")}
         >
           Erase
         </button>
         <button
-          className={selectedTool === "move" ? "SelectedTool" : ""}
-          onClick={() => handleToolClick("move")}
+          className={selectedTool === "select" ? "tool SelectedTool" : "tool"}
+          onClick={() => handleToolClick("select")}
         >
-          Move
+          select
+        </button>
+        <button
+          className={"tool"}
+          onClick={() => clear()}
+        >
+          clear
         </button>
       </div>
       <div className="circuitPlayground">

@@ -35,27 +35,16 @@ $purple: #250137;
 }
 
 .Toolbar {
-  width: 82px;
-  height: 100%;
+  width: 124px;
+  height: auto;
   background-color: $light-grey;
   border-radius: 0.5rem;
 }
 
-.GatePicker {
-  width: 82px;
-  height: 100%;
-  background-color: $light-grey;
-  border-radius: 0.5rem;
-}
-
-.draggable-element {
-  width: 100px;
-  height: 100px;
-}
 .Canvas {
   width: calc(100% - 82px);
   height: 100%;
-  background-color: $light-grey;
+  background-color: transparent;
   margin: 32px;
   border: 2px solid $medium-grey;
   border-radius: 0.5rem;
@@ -68,17 +57,19 @@ $purple: #250137;
   justify-content: center;
   height: 90%;
   width: 100%;
+  min-width: 1000px;
+  min-height: 500px;
   background-color: white;
   padding: 32px;
 }
 
 .gridElement {
   width: 32px;
-  aspect-ratio: 1;
+  height: 32px;
   border-radius: 0px;
   margin: 0px;
   padding: 0px;
-  background-color: white;
+  background-color: transparent;
   border: none;
 }
 
@@ -90,6 +81,11 @@ $purple: #250137;
     position: relative;
     width: calc(20 * 32) px;
     height: calc(15 * 32) px;
+    margin: 10px;
+    border: 2px solid $dark-grey;
+    border-radius: 1rem;
+    background-color: transparent;
+
 }
 .gridContainer {
   display: grid;
@@ -104,32 +100,77 @@ $purple: #250137;
   gap: 0px; /* Adjust the gap between grid items as needed */
   justify-content: center; /* Center the grid horizontally */
   align-content: center; /* Center the grid vertically */
-  width: calc(20 * 32) px;
-  height: calc(15 * 32) px;
-  border: 1px solid $light-grey;
+  width: 640px;
+  height: 480px;
+  background-color: transparent;
 }
 
-.and {
-//   background-image: url("data:image/svg+xml,%3Csvg id='eYpfie3H4wT1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='M70,70h101.937196c43.223675,3.572604,64.853368,50.745325,62.5,85-.221959,36.382158-24.633391,81.561725-54.437196,85h-110v-170Z' transform='matrix(.999999 0 0 1-2.218446 0)' fill='%231c247d' stroke-width='40'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1 0 0 0.983787-9.167716 1.220957)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3C/svg%3E%0A");
-    background-image: url(../assets/and.png);
+@mixin gateInOut{
     background-repeat: no-repeat;
     background-size: 32px 32px;
 }
 
-.or {
-  background-image: url("data:image/svg+xml,%3Csvg id='ees3MxJv8Zz1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='M70,70h101.937196c43.223675,3.572604,64.853368,50.745325,62.5,85-.221959,36.382158-24.633391,81.561725-54.437196,85h-110c39.281457-32.631239,46.48935-127.150713,0-170Z' transform='matrix(1.094643 0 0 1-28.348321 0)' fill='%231c247d' stroke-width='40'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1.18761 0 0 0.983787-59.822416 1.220957)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' transform='matrix(1.165041 0 0 1 0.398736 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='matrix(1.165041 0 0-1 0.398736 400)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3C/svg%3E%0A");
+.gate{
+    width: 32px;
+    height: 32px;
 }
 
-.not{
-    background-image: url("data:image/svg+xml,%3Csvg id='edSwuv50ABW1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 300 300' shape-rendering='geometricPrecision' text-rendering='geometricPrecision'%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M237.631887,151.23095h63.305979' transform='matrix(1 0 0 0.983787-9.167716 1.220957)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,100h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Cpath d='M0,200h67.781484' transform='translate(5.992098 0)' fill='none' stroke='%231c247d' stroke-width='20'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 80.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 0 180.05858)' fill='%23100b39' stroke-width='0'/%3E%3Crect width='30' height='30' rx='0' ry='0' transform='matrix(1.329328 0 0 1.329328 260.11716 130.05858)' fill='%23100b39' stroke-width='0'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='' fill='none' stroke='%233f5787' stroke-width='0.6'/%3E%3Cpath d='M70,50v210L228.464171,150L70,50Z' fill='%231c247d' stroke-width='0.6'/%3E%3Cellipse rx='20' ry='19.97071' transform='translate(220 149.97071)' fill='%231c247d' stroke-width='0'/%3E%3C/svg%3E%0A");
+.and {
+    @include gateInOut();
+    background-image: url(../assets/and.png);
+
 }
-.SelectedTool {
-  background-color: $dark-grey;
+.or {
+    @include gateInOut();
+    background-image: url(../assets/or.png);
 }
+.not {
+    @include gateInOut();
+    background-image: url(../assets/not.png);
+}
+.switchOff {
+    @include gateInOut();
+    background-image: url(../assets/off.png);
+}
+
+.switchOn {
+    @include gateInOut();
+    background-image: url(../assets/on.png);
+}
+
+.switchOn {
+    @include gateInOut();
+    background-image: url(../assets/on.png);
+}
+.output {
+    @include gateInOut();
+    background-image: url(../assets/light-off.png);
+}
+
+.outputOn{
+    @include gateInOut();
+    background-image: url(../assets/light-on.png);
+}
+
+
 
 .selectedGate {
     background-color: $light-grey;
   }
+
+.tool{
+    width: 80%;
+    margin: 10px;
+    background-color: $medium-grey;
+    border: none;
+    border-radius: 1rem;
+}
+
+
+.SelectedTool {
+    background-color: $dark-grey;
+  }
+
 
 Canvas{
     position: absolute;
