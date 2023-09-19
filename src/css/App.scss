@@ -147,6 +147,7 @@ $purple: #250137;
     background-image: url(../assets/light-off.png);
 }
 
+
 .outputOn{
     @include gateInOut();
     background-image: url(../assets/light-on.png);

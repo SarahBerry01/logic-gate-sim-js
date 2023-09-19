@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getInputOne, getInputZero } from "./helpers";
 function Playground() {
   const gateDim = 32;
   const [selectedTool, setSelectedTool] = useState("move");
@@ -50,6 +51,9 @@ function Playground() {
     ctx.lineWidth = scale * 2; // Line width
     // Loop through the selected elements
     elements.forEach((element) => {
+      if (element.classList.contains("output")) {
+        evaluateOutputs(element);
+      }
       if (element.classList.contains("gate")) {
         if (element.getAttribute("inZeroRow")) {
           let x1 = scale * parseInt(element.getAttribute("col")) * gateDim + 20;
@@ -111,22 +115,29 @@ function Playground() {
         element.setAttribute("gate", "switchOff");
       }
     }
+    const elements = document.querySelectorAll(".gridElement");
+    elements.forEach((element) => {
+      if (element.classList.contains("output")) {
+        evaluateOutputs(element);
+      }
+    });
   }
-  function handleErase(element){
-  if (selectedTool === "erase") {
-    element.setAttribute("gate", null);
-    element.setAttribute("class", `gridElement`);
-    //add logic to remove connections
-  }}
+  function handleErase(element) {
+    if (selectedTool === "erase") {
+      element.setAttribute("gate", null);
+      element.setAttribute("class", `gridElement`);
+      //add logic to remove connections
+    }
+  }
 
-  function handleAddGate(element){
+  function handleAddGate(element) {
     if (["and", "or", "not", "switchOff", "output"].includes(selectedTool)) {
       element.setAttribute("gate", selectedTool);
       element.setAttribute("class", `gridElement gate ${selectedTool}`);
     }
   }
 
-  function handleConnect(element){
+  function handleConnect(element) {
     if (selectedTool === "connect") {
       if (selectedGate === undefined) {
         if (
@@ -156,13 +167,57 @@ function Playground() {
     }
   }
 
+  function evaluateOutputs(element) {
+    // base case
+    if (element.classList.contains("switchOn")) {
+      return true;
+    }
+    if (element.classList.contains("switchOff")) {
+      return false;
+    }
+    // if two input gate
+    if (element.classList.contains("and") || element.classList.contains("or")) {
+      const inputZero = getInputZero(element);
+      const inputOne = getInputOne(element);
+
+      if (!inputZero || !inputOne) {
+        return false;
+      }
+      if (element.classList.contains("and")) {
+        return evaluateOutputs(inputZero) && evaluateOutputs(inputOne);
+      }
+      if (element.classList.contains("or")) {
+        return evaluateOutputs(inputZero) || evaluateOutputs(inputOne);
+      }
+      
+    }
+    // if not gate
+    if (element.classList.contains("not")) {
+      const inputZero = getInputZero(element);
+      if (!inputZero) {
+        return false;
+      }
+      return !evaluateOutputs(inputZero);
+    }
+    if (element.classList.contains("output")) {
+      const inputZero = getInputZero(element);
+      if (!inputZero) {
+        return false;
+      }
+      if(evaluateOutputs(inputZero)){
+        element.classList.add("outputOn")
+      }else{
+        element.classList.remove("outputOn")
+      }
+    }
+  }
+
   function handleClick(row, col) {
     const element = document.querySelector(`[row="${row}"][col="${col}"]`);
     handleSwitch(element);
     handleErase(element);
     handleAddGate(element);
     handleConnect(element);
-
   }
 
   return (
@@ -226,6 +281,7 @@ function Playground() {
         <div class="gridContainer">{generateGrid()}</div>
         <canvas id="canvas" width="6400" height="4800" />
       </div>
+      
     </div>
   );
 }
