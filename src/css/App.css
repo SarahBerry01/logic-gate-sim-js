@@ -146,12 +146,26 @@
   background-image: url(../assets/light-on.png);
 }
 
+.buttonImg {
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+Button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .selectedGate {
   background-color: #eeeeee;
 }
 
 .tool {
   width: 80%;
+  height: 42px;
   margin: 10px;
   background-color: #dfdfdf;
   border: none;

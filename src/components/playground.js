@@ -41,7 +41,7 @@ function Playground() {
     return grid;
   };
 
-  function renderConnections(){
+  function renderConnections() {
     const scale = 10;
     const elements = document.querySelectorAll(".gridElement");
     const canvas = document.getElementById("canvas");
@@ -90,9 +90,9 @@ function Playground() {
     });
   }
 
-  
-
-  useEffect(() => {renderConnections()});
+  useEffect(() => {
+    renderConnections();
+  });
 
   function draw(ctx, x1, y1, x2, y2) {
     ctx.beginPath();
@@ -137,14 +137,14 @@ function Playground() {
       element.removeAttribute("inOneCol");
       // remove connections of output
       const inputZeros = document.querySelectorAll(
-        `[inZeroRow="${element.getAttribute("row")}"][inZeroCol="${element.getAttribute(
-          "col"
-        )}"]`
+        `[inZeroRow="${element.getAttribute(
+          "row"
+        )}"][inZeroCol="${element.getAttribute("col")}"]`
       );
       const inputOnes = document.querySelectorAll(
-        `[inOneRow="${element.getAttribute("row")}"][inOneCol="${element.getAttribute(
-          "col"
-        )}"]`
+        `[inOneRow="${element.getAttribute(
+          "row"
+        )}"][inOneCol="${element.getAttribute("col")}"]`
       );
 
       inputZeros.forEach((connectedElement) => {
@@ -257,52 +257,61 @@ function Playground() {
           }
           onClick={() => handleToolClick("switchOff")}
         >
-          Add switch
+          <img className="buttonImg" src={require("../assets/on.png")} />
+          INPUT
         </button>
         <button
           className={selectedTool === "output" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("output")}
         >
-          Add output
+          <img className="buttonImg" src={require("../assets/light-on.png")} />
+          OUTPUT
         </button>
         <button
           className={selectedTool === "and" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("and")}
         >
-          Add and
+          <img className="buttonImg" src={require("../assets/and.png")} />
+          AND
         </button>
         <button
           className={selectedTool === "or" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("or")}
         >
-          Add or
+          <img className="buttonImg" src={require("../assets/or.png")} />
+          OR
         </button>
         <button
           className={selectedTool === "not" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("not")}
         >
-          Add not
+          <img className="buttonImg" src={require("../assets/not.png")} />
+          NOT
         </button>
         <button
           className={selectedTool === "connect" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("connect")}
         >
-          Connect
+          <img className="buttonImg" src={require("../assets/connect.png")} />
+          CONNECT
         </button>
         <button
           className={selectedTool === "erase" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("erase")}
         >
-          Erase
+          <img className="buttonImg" src={require("../assets/erase.png")} />
+          ERASE
         </button>
         <button
           className={selectedTool === "select" ? "tool SelectedTool" : "tool"}
           onClick={() => handleToolClick("select")}
         >
-          select
+          <img className="buttonImg" src={require("../assets/select.png")} />
+          SELECT
         </button>
         <button className={"tool"} onClick={() => clear()}>
-          clear
+          <img className="buttonImg" src={require("../assets/clear.png")} />
+          CLEAR
         </button>
       </div>
       <div className="circuitPlayground">

@@ -16,7 +16,7 @@ $purple: #250137;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
 }
 
 .Header {
@@ -77,15 +77,14 @@ $purple: #250137;
   background-color: $light-grey; /* Background color on hover */
 }
 
-.circuitPlayground{
-    position: relative;
-    width: calc(20 * 32) px;
-    height: calc(15 * 32) px;
-    margin: 10px;
-    border: 2px solid $dark-grey;
-    border-radius: 1rem;
-    background-color: transparent;
-
+.circuitPlayground {
+  position: relative;
+  width: calc(20 * 32) px;
+  height: calc(15 * 32) px;
+  margin: 10px;
+  border: 2px solid $dark-grey;
+  border-radius: 1rem;
+  background-color: transparent;
 }
 .gridContainer {
   display: grid;
@@ -105,80 +104,88 @@ $purple: #250137;
   background-color: transparent;
 }
 
-@mixin gateInOut{
-    background-repeat: no-repeat;
-    background-size: 32px 32px;
+@mixin gateInOut {
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
 }
 
-.gate{
-    width: 32px;
-    height: 32px;
+.gate {
+  width: 32px;
+  height: 32px;
 }
 
 .and {
-    @include gateInOut();
-    background-image: url(../assets/and.png);
-
+  @include gateInOut();
+  background-image: url(../assets/and.png);
 }
 .or {
-    @include gateInOut();
-    background-image: url(../assets/or.png);
+  @include gateInOut();
+  background-image: url(../assets/or.png);
 }
 .not {
-    @include gateInOut();
-    background-image: url(../assets/not.png);
+  @include gateInOut();
+  background-image: url(../assets/not.png);
 }
 .switchOff {
-    @include gateInOut();
-    background-image: url(../assets/off.png);
+  @include gateInOut();
+  background-image: url(../assets/off.png);
 }
 
 .switchOn {
-    @include gateInOut();
-    background-image: url(../assets/on.png);
+  @include gateInOut();
+  background-image: url(../assets/on.png);
 }
 
 .switchOn {
-    @include gateInOut();
-    background-image: url(../assets/on.png);
+  @include gateInOut();
+  background-image: url(../assets/on.png);
 }
 .output {
-    @include gateInOut();
-    background-image: url(../assets/light-off.png);
+  @include gateInOut();
+  background-image: url(../assets/light-off.png);
 }
 
-
-.outputOn{
-    @include gateInOut();
-    background-image: url(../assets/light-on.png);
+.outputOn {
+  @include gateInOut();
+  background-image: url(../assets/light-on.png);
 }
 
+.buttonImg {
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
 
+Button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
 .selectedGate {
-    background-color: $light-grey;
-  }
-
-.tool{
-    width: 80%;
-    margin: 10px;
-    background-color: $medium-grey;
-    border: none;
-    border-radius: 1rem;
+  background-color: $light-grey;
 }
 
+.tool {
+  width: 80%;
+  height: 42px;
+  margin: 10px;
+  background-color: $medium-grey;
+  border: none;
+  border-radius: 1rem;
+}
 
 .SelectedTool {
-    background-color: $dark-grey;
-  }
+  background-color: $dark-grey;
+}
 
-
-Canvas{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    background-color: transparent;
-    pointer-events: none;
-    width: calc(20 * 32) px;
-    height: calc(15 * 32 ) px;
+Canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: transparent;
+  pointer-events: none;
+  width: calc(20 * 32) px;
+  height: calc(15 * 32) px;
 }
