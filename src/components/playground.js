@@ -41,7 +41,7 @@ function Playground() {
     return grid;
   };
 
-  useEffect(() => {
+  function renderConnections(){
     const scale = 10;
     const elements = document.querySelectorAll(".gridElement");
     const canvas = document.getElementById("canvas");
@@ -88,7 +88,11 @@ function Playground() {
         }
       }
     });
-  });
+  }
+
+  
+
+  useEffect(() => {renderConnections()});
 
   function draw(ctx, x1, y1, x2, y2) {
     ctx.beginPath();
@@ -126,7 +130,32 @@ function Playground() {
     if (selectedTool === "erase") {
       element.setAttribute("gate", null);
       element.setAttribute("class", `gridElement`);
-      //add logic to remove connections
+      // remove elements inputs
+      element.removeAttribute("inZeroRow");
+      element.removeAttribute("inZeroCol");
+      element.removeAttribute("inOneRow");
+      element.removeAttribute("inOneCol");
+      // remove connections of output
+      const inputZeros = document.querySelectorAll(
+        `[inZeroRow="${element.getAttribute("row")}"][inZeroCol="${element.getAttribute(
+          "col"
+        )}"]`
+      );
+      const inputOnes = document.querySelectorAll(
+        `[inOneRow="${element.getAttribute("row")}"][inOneCol="${element.getAttribute(
+          "col"
+        )}"]`
+      );
+
+      inputZeros.forEach((connectedElement) => {
+        connectedElement.removeAttribute("inZeroRow");
+        connectedElement.removeAttribute("inZeroCol");
+      });
+      inputOnes.forEach((connectedElement) => {
+        connectedElement.removeAttribute("inOneRow");
+        connectedElement.removeAttribute("inOneCol");
+      });
+      renderConnections();
     }
   }
 
@@ -189,7 +218,6 @@ function Playground() {
       if (element.classList.contains("or")) {
         return evaluateOutputs(inputZero) || evaluateOutputs(inputOne);
       }
-      
     }
     // if not gate
     if (element.classList.contains("not")) {
@@ -204,10 +232,10 @@ function Playground() {
       if (!inputZero) {
         return false;
       }
-      if(evaluateOutputs(inputZero)){
-        element.classList.add("outputOn")
-      }else{
-        element.classList.remove("outputOn")
+      if (evaluateOutputs(inputZero)) {
+        element.classList.add("outputOn");
+      } else {
+        element.classList.remove("outputOn");
       }
     }
   }
@@ -281,7 +309,6 @@ function Playground() {
         <div class="gridContainer">{generateGrid()}</div>
         <canvas id="canvas" width="6400" height="4800" />
       </div>
-      
     </div>
   );
 }
