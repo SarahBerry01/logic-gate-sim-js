@@ -75,7 +75,7 @@ function Playground() {
           draw(ctx, x1, y1, x2, y2);
         }
         if (element.getAttribute("inOneRow")) {
-          const x1 = scale * parseInt(element.getAttribute("col")) * gateDim;
+          const x1 = scale * parseInt(element.getAttribute("col")) * gateDim + 20;
           const y1 =
             scale * (parseInt(element.getAttribute("row")) + 2 / 3) * gateDim;
           const x2 =
