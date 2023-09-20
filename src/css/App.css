@@ -29,10 +29,6 @@
   color: #eeeeee;
 }
 
-@font-face {
-  font-family: titleFont;
-  src: url(../assets/Blox2.ttf);
-}
 .Toolbar {
   width: 124px;
   height: auto;
